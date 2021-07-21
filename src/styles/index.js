@@ -7,17 +7,17 @@ import {
   Button as ButtonPaper,
   TextInput as TextInputPaper,
 } from 'react-native-paper';
+import LinearGradient from 'react-native-linear-gradient';
 
 import theme from './theme.json';
-import LinearGradient from 'react-native-linear-gradient';
+import util from '../util';
+
 // import {TouchableOpacity} from 'react-native-gesture-handler';
 
-// import util from '../util';
-
-// export const Spacer = styled.View`
-//   width: 100%;
-//   height: ${(props) => props.size || '10px'};
-// `;
+export const Spacer = styled.View`
+  width: 100%;
+  height: ${(props) => props.size || '10px'};
+`;
 
 export const Cover = styled.ImageBackground.attrs((props) => ({
   source: {
@@ -106,25 +106,25 @@ export const Badge = styled(BadgePaper)`
   background: ${(props) => theme.colors[props.color || 'danger']};
 `;
 
-// export const Button = styled(ButtonPaper).attrs((props) => ({
-//   color: theme.colors[props.background] || props.background,
-//   width: props.block ? '100%' : 'auto',
-//   labelStyle: {
-//     color: theme.colors[props.textColor || 'light'],
-//     letterSpacing: 0,
-//   },
-// }))``;
+export const Button = styled(ButtonPaper).attrs((props) => ({
+  color: theme.colors[props.background] || props.background,
+  width: props.block ? '100%' : 'auto',
+  labelStyle: {
+    color: theme.colors[props.textColor || 'light'],
+    letterSpacing: 0,
+  },
+}))``;
 
-// export const TextInput = styled(TextInputPaper).attrs({
-//   mode: 'outlined',
-//   theme: {
-//     colors: {
-//       placeholder: util.toAlpha(theme.colors.muted, 30),
-//     },
-//   },
-// })`
-//   height: 45px;
-//   width: 100%;
-//   font-size: 15px;
-//   background: ${theme.colors.light};
-// `;
+export const TextInput = styled(TextInputPaper).attrs({
+  mode: 'outlined',
+  theme: {
+    colors: {
+      placeholder: util.toAlpha(theme.colors.muted, 30),
+    },
+  },
+})`
+  height: 45px;
+  width: 100%;
+  font-size: 15px;
+  background: ${theme.colors.light};
+`;
