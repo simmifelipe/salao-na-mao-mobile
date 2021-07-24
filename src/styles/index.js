@@ -30,6 +30,7 @@ export const Cover = styled.ImageBackground.attrs((props) => ({
   border-radius: ${(props) => (props.circle ? props.width : '3px')};
   border: ${(props) => props.border || 'none'};
   background-color: ${theme.colors.muted};
+  overflow: hidden;
 `;
 
 export const Box = styled.View`
@@ -88,6 +89,8 @@ export const Text = styled(TextPaper).attrs({})`
   font-family: ${(props) => (props.bold ? 'Ubuntu-Bold' : 'Ubuntu-Light')};
   margin: ${(props) => props.spacing || 0};
   padding: ${(props) => (props.hasPadding ? '20px' : '0px')};
+  padding-bottom: ${(props) =>
+    props.removePaddingBottom ? '0' : props.hasPadding ? '20px' : '0px'};
   line-height: ${(props) =>
     props.composed ? '30px' : props.small ? '13px' : '15px'};
   text-decoration: ${(props) => (props.underline ? 'underline' : 'none')};
