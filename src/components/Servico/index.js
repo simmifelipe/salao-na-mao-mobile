@@ -1,16 +1,29 @@
 import React from 'react';
+import moment from 'moment';
 import { Box, Button, Cover, Text, Touchable } from '../../styles';
+import consts from '../../consts';
+import { useDispatch } from 'react-redux';
+import { updateAgendamento } from '../../store/modules/salao/actions';
 
-const Servico = () => {
+const Servico = ({ servico }) => {
+  const dispatch = useDispatch();
+
   return (
-    <Touchable hasPadding background="light" height="100px" align="center">
-      <Cover image="https://i.pinimg.com/736x/4b/7a/8c/4b7a8c26765c37dc3d7ef339f015e34c.jpg" />
+    <Touchable
+      hasPadding
+      background="light"
+      height="100px"
+      align="center"
+      onPress={() => dispatch(updateAgendamento({ servicoId: servico._id }))}>
+      <Cover image={`${consts.bucketUrl}/${servico?.arquivos[0]?.caminho}`} />
 
       <Box direction="column">
         <Text bold color="dark">
-          Corte de cabelo feminino
+          {servico.titulo}
         </Text>
-        <Text small>R$ 45 • 30 min</Text>
+        <Text small>
+          R$ {servico.preco} • {servico.duracao} min
+        </Text>
       </Box>
 
       <Box>

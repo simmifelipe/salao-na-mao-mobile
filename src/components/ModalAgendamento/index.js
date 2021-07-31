@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Dimensions } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -11,10 +11,25 @@ import EspecialistasModal from './Especialistas/modal';
 import PaymentPicker from './payment';
 
 import { Box, Button } from '../../styles';
+import { useSelector } from 'react-redux';
 
 const ModalAgendamento = () => {
+  const sheetRef = useRef(null);
+  const { form } = useSelector((state) => state.salao);
+
+  const setSnap = (snapIndex) => {
+    sheetRef.current.snapTo(snapIndex);
+  };
+
+  useEffect(() => {
+    if (form.modalAgendamento) {
+      setSnap(form.modalAgendamento);
+    }
+  }, [form.modalAgendamento]);
+
   return (
     <BottomSheet
+      ref={sheetRef}
       initialSnap={0}
       snapPoints={[0, 70, Dimensions.get('window').height - 30]}
       renderContent={() => (
