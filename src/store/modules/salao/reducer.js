@@ -1,4 +1,6 @@
+import produce from 'immer';
 import consts from '../../../consts';
+import types from './types';
 
 const INITIAL_STATE = {
   salao: {},
@@ -23,6 +25,10 @@ const INITIAL_STATE = {
 
 function salao(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case types.UPDATE_SALAO:
+      return produce(state, (draft) => {
+        draft.salao = { ...salao, ...action.salao };
+      });
     default: {
       return state;
     }

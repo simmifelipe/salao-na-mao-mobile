@@ -15,7 +15,7 @@ import { Box, Button } from '../../styles';
 const ModalAgendamento = () => {
   return (
     <BottomSheet
-      initialSnap={2}
+      initialSnap={0}
       snapPoints={[0, 70, Dimensions.get('window').height - 30]}
       renderContent={() => (
         <>
