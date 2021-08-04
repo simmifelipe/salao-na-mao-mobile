@@ -12,10 +12,24 @@ import PaymentPicker from './payment';
 
 import { Box, Button } from '../../styles';
 import { useSelector } from 'react-redux';
+import util from '../../util';
+import moment from 'moment';
 
 const ModalAgendamento = () => {
+  const { form, agendamento, servicos, agenda, colaboradores } = useSelector(
+    (state) => state.salao,
+  );
   const sheetRef = useRef(null);
-  const { form } = useSelector((state) => state.salao);
+
+  const dataSelecionada = moment(agendamento.data).format('YYYY-MM-DD');
+  const horaSelecionada = moment(agendamento.data).format('HH:mm');
+  const { horariosDisponiveis, colaboradoresDia } = util.selectAgendamento(
+    agenda,
+    dataSelecionada,
+    agendamento.colaboradorId,
+  );
+
+  const servico = servicos.filter((s) => s._id === agendamento.servicoId)[0];
 
   const setSnap = (snapIndex) => {
     sheetRef.current.snapTo(snapIndex);
@@ -38,9 +52,18 @@ const ModalAgendamento = () => {
             stickyHeaderIndices={[0]}
             style={{ backgroundColor: '#fff', height: '100%' }}>
             <ModalHeader />
-            <Resume />
-            <DateTimePicker />
-            <EspecialistaPicker />
+            <Resume servico={servico} />
+            <DateTimePicker
+              servico={servico}
+              agenda={agenda}
+              dataSelecionada={dataSelecionada}
+              horaSelecionada={horaSelecionada}
+              horariosDisponiveis={horariosDisponiveis}
+            />
+            <EspecialistaPicker
+              colaboradores={colaboradores}
+              agendamento={agendamento}
+            />
             <PaymentPicker />
 
             <Box hasPadding>
@@ -54,7 +77,14 @@ const ModalAgendamento = () => {
               </Button>
             </Box>
           </ScrollView>
-          <EspecialistasModal />
+          <EspecialistasModal
+            form={form}
+            colaboradores={colaboradores}
+            agendamento={agendamento}
+            servicos={servicos}
+            horaSelecionada={horaSelecionada}
+            colaboradoresDia={colaboradoresDia}
+          />
         </>
       )}
     />

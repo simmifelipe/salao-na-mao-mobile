@@ -7,6 +7,7 @@ const types = {
   UPDATE_AGENDAMENTO: '@salao/UPDATE_AGENDAMENTO',
   FILTER_AGENDA: '@salao/FILTER_AGENDA',
   UPDATE_AGENDA: '@salao/UPDATE_AGENDA',
+  UPDATE_COLABORADORES: '@salao/UPDATE_COLABORADORES',
 };
 
 export default types;

@@ -2,13 +2,35 @@ import React from 'react';
 import { Dimensions } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Modal from 'react-native-simple-modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateForm } from '../../../store/modules/salao/actions';
 
 import { Box, Cover, Text, Touchable } from '../../../styles';
 import theme from '../../../styles/theme.json';
 
-const EspecialistasModal = () => {
+const EspecialistasModal = ({
+  form,
+  colaboradores,
+  agendamento,
+  servicos,
+  horaSelecionada,
+  colaboradoresDia,
+}) => {
+  const dispatch = useDispatch();
+
+  const colaboradoresIdsDisponiveis = [];
+  for (let colaboradorId of Object.keys(colaboradoresDia)) {
+    let horarios = colaboradoresDia[colaboradorId].flat(2);
+    if (horarios.includes(horaSelecionada)) {
+      colaboradoresIdsDisponiveis.push(colaboradorId);
+    }
+  }
+
   return (
-    <Modal open={false}>
+    <Modal
+      offset={-500}
+      open={form.modalEspecialista}
+      modalDidOpen={() => dispatch(updateForm({ modalEspecialista: false }))}>
       <ScrollView>
         <Box hasPadding direction="column">
           <Text bold color="dark">

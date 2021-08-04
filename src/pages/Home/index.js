@@ -16,11 +16,11 @@ const Home = () => {
   const finalServicos =
     form.inputFiltro.length > 0
       ? servicos.filter((s) => {
-        const titulo = s.titulo.toLowerCase().trim();
-        const arraySearch = form.inputFiltro.toLowerCase().trim().split(' ');
+          const titulo = s.titulo.toLowerCase().trim();
+          const arraySearch = form.inputFiltro.toLowerCase().trim().split(' ');
 
-        return arraySearch.every((w) => titulo.search(w) !== -1);
-      })
+          return arraySearch.every((w) => titulo.search(w) !== -1);
+        })
       : servicos;
 
   useEffect(() => {

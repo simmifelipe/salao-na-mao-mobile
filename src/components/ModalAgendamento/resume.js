@@ -1,9 +1,10 @@
 import React from 'react';
 import { Box, Cover, Spacer, Text, Title } from '../../styles';
 import util from '../../util';
+import consts from '../../consts';
 import theme from '../../styles/theme.json';
 
-const Resume = () => {
+const Resume = ({ servico }) => {
   return (
     <Box
       align="center"
@@ -12,12 +13,12 @@ const Resume = () => {
       <Cover
         width="80px"
         height="80px"
-        image="https://reyne.info/images5/0420/tendencia-de-corte-cabelo-2020/tendencia-de-corte-cabelo-2020-59.jpg"
+        image={`${consts.bucketUrl}/${servico?.arquivos[0]?.caminho}`}
       />
       <Box direction="column">
-        <Title small>Corte de cabelo feminino</Title>
+        <Title small>{servico?.titulo}</Title>
         <Spacer size="4px" />
-        <Text small>Total: R$ 45.00</Text>
+        <Text small>Total: R$ {servico?.preco}</Text>
       </Box>
     </Box>
   );

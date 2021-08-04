@@ -11,6 +11,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import theme from './theme.json';
 import util from '../util';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 // import {TouchableOpacity} from 'react-native-gesture-handler';
 
@@ -52,7 +53,7 @@ export const Box = styled.View`
     theme.colors[props.background] || props.background || 'transparent'};
 `;
 
-export const Touchable = styled.TouchableOpacity`
+export const Touchable = styled(TouchableOpacity)`
   flex-direction: ${(props) => props.direction || 'row'};
   justify-content: ${(props) => props.justify || 'flex-start'};
   align-items: ${(props) => props.align || 'flex-start'};

@@ -1,8 +1,16 @@
 import React from 'react';
-import { Box, Button, Cover, Text } from '../../../styles';
+import { useDispatch } from 'react-redux';
+import { updateForm } from '../../../store/modules/salao/actions';
+import { Box, Button, Cover, Text, Touchable } from '../../../styles';
 import theme from '../../../styles/theme.json';
 
-const EspecialistaPicker = () => {
+const EspecialistaPicker = ({ colaboradores, agendamento }) => {
+  const dispatch = useDispatch();
+
+  const colaborador = colaboradores.filter(
+    (c) => c._id === agendamento.colaboradorId,
+  )[0];
+
   return (
     <>
       <Text bold hasPadding removePaddingBottom color="dark">
@@ -10,23 +18,21 @@ const EspecialistaPicker = () => {
       </Text>
       <Box hasPadding removePaddingBottom>
         <Box align="center">
-          <Cover
-            width="45px"
-            height="45px"
-            circle
-            image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTciiL00Bb5_2vKcIWNX6m94D4WTm3a0-dMjw&usqp=CAU"
-          />
-          <Text small>Juliana Righi</Text>
+          <Cover width="45px" height="45px" circle image={colaborador?.foto} />
+          <Text small>{colaborador?.nome}</Text>
         </Box>
         <Box>
-          <Button
-            uppercase={false}
-            textColor="muted"
-            background={theme.colors.light}
-            block
-            mode="contained">
-            Trocar Especialista
-          </Button>
+          <Touchable
+            onPress={() => dispatch(updateForm({ modalEspecialista: true }))}>
+            <Button
+              uppercase={false}
+              textColor="muted"
+              background={theme.colors.light}
+              block
+              mode="contained">
+              Trocar Especialista
+            </Button>
+          </Touchable>
         </Box>
       </Box>
     </>
