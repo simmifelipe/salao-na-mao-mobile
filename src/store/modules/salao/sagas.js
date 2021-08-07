@@ -7,6 +7,7 @@ import {
   updateAgenda,
   updateAgendamento,
   updateColaboradores,
+  updateForm,
   updateSalao,
   updateServicos,
 } from './actions';
@@ -48,7 +49,6 @@ export function* allServicos() {
 export function* filterAgenda() {
   try {
     const { agendamento } = yield select((state) => state.salao);
-    console.log(agendamento);
     const { data: res } = yield call(
       api.post,
       '/agendamento/dias-disponiveis',
@@ -82,8 +82,27 @@ export function* filterAgenda() {
   }
 }
 
+export function* saveAgendamento() {
+  try {
+    yield put(updateForm({ agendamentoLoading: false }));
+
+    const { agendamento } = yield select((state) => state.salao);
+    const { data: res } = yield call(api.post, '/agendamento', agendamento);
+
+    if (res.error) {
+      alert(res.message);
+      return false;
+    }
+
+    yield put(updateForm({ agendamentoLoading: false }));
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
 export default all([
   takeLatest(types.GET_SALAO, getSalao),
   takeLatest(types.ALL_SERVICOS, allServicos),
   takeLatest(types.FILTER_AGENDA, filterAgenda),
+  takeLatest(types.SAVE_AGENDAMENTO, saveAgendamento),
 ]);
